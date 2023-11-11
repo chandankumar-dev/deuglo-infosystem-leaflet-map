@@ -1,13 +1,31 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+/* Default icon options */
+.leaflet-default-icon-icon {
+  background-image: url(~leaflet/dist/images/marker-icon.png),
+    url(~leaflet/dist/images/marker-icon-2x.png); /* normal[, Retina] */
+  cursor: url(~leaflet/dist/images/marker-icon.png),
+    url(~leaflet/dist/images/marker-icon-2x.png), auto; /* normal[, Retina], auto for compliance with cursor syntax */
+  width: 25px;
+  height: 41px;
+  margin: -41px -12px; /* margin top and left to reversely position iconAnchor */
+}
+
+.leaflet-default-icon-popup {
+  margin: -34px 1px; /* margin top and left to position popupAnchor */
+}
+.leaflet-default-icon-tooltip {
+  margin: -28px 16px; /* margin top and left to position tooltipAnchor, even if direction 'bottom' or 'right' */
 }

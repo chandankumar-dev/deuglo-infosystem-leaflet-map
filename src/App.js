@@ -41,7 +41,7 @@ export default function App() {
   const mapRef = useRef(null);
 
   /*
-     this useEffect initializes a Leaflet map, fetches data related to the map on component mount, and cleans up resources when the component is unmounted or when the queryBy dependency changes. it has has a dependency array [queryBy], meaning it will run the effect whenever the value of queryBy changes. This ensures that the map is reinitialized and data is refetched whenever queryBy changes.
+     initialize a Leaflet map, fetch data related to the map on component mount, and clean up resources when the component is unmounted or when the queryBy dependency changes.
   */
   useEffect(() => {
     mapRef.current = createMap();
@@ -65,28 +65,28 @@ export default function App() {
       popupAnchor: [0, -32],
     });
 
-    /*this code removes all marker layers from the Leaflet map referenced by mapRef.current. It can be useful when you want to clear or update the map by removing existing marker layers.*/
+    /*remove all marker layers from the Leaflet map. It is useful when we want to clear or update the map by removing existing marker layers.*/
     mapRef.current.eachLayer((layer) => {
       if (layer instanceof L.Marker) {
         mapRef.current.removeLayer(layer);
       }
     });
 
-    /*This code iterates over elements in the queryResult array and creates a Leaflet marker for each element on the Leaflet map referenced by mapRef.current.*/
+    // create a Leaflet marker for each element on the Leaflet map.
     queryResult?.forEach((obj) => {
       const marker = L.marker([obj.lat, obj.lon], {
         icon: selectedIcon,
       }).addTo(mapRef.current);
 
-      // It defines the content for the marker's popup.
+      // content for the marker's popup.
       const popupContent = `<div><b>Name: ${obj?.tags?.name}</b> <br/> <b>latitude: ${obj?.lat}</b> <br/> <b>longitude: ${obj?.lon}</b></div>`;
 
-      // It binds the popup content to the marker, associating the popup with the specific marker on the map.
+      // bind the popup content to the marker, associating the popup with the specific marker on the map.
       marker.bindPopup(popupContent);
     });
   }, [queryResult, queryBy]);
 
-  // createMap function creates a leaflet map using the leaflet library and it returns a Leaflet map instance
+  // it creates a leaflet map using the leaflet library and it returns a Leaflet map instance
   function createMap() {
     return L.map("map", {
       center: inputFromForm
